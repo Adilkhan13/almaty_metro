@@ -21,7 +21,6 @@ STATIONS_LIST = (
     'RMBK'
 )
 
-# Входные данные
 # TODO Насколько я знаю в выходные другое расписание, но данные так же не были предоставленны
 def get_schedule_df()->pd.DataFrame:
     "Выгружем данные"
@@ -31,11 +30,7 @@ def get_schedule_df()->pd.DataFrame:
     df['arrival_time'] = pd.to_datetime(df['arrival_time'], format="%H:%M:%S").dt.time
     return df
 
-df = get_schedule_df()
-curr_time = datetime.datetime.today().time()
-start_position = 'MSK'
-end_position = 'RMBK'
-################################################
+
 
 
 def trip_duration(
@@ -79,6 +74,13 @@ def trip_duration(
     return start_time, end_time, stations_count
 
 if __name__ == "__main__":
+    # Входные данные
+    df = get_schedule_df()
+    curr_time = datetime.datetime.today().time()
+    start_position = 'MSK'
+    end_position = 'RMBK'
+    ################################################
+    
     start_time, end_time, stations_count  = trip_duration(df, curr_time, start_position, end_position)
 
     print(f"Время отбытия: {start_time}")
